@@ -10,7 +10,8 @@
     "serve:development": "nodemon --env-file=.env src/index.js",
     "serve:production": "node src/index.js",
     "publish-local": "node --env-file=.env bin/hackernews.js",
-    "publish-prod": "node bin/hackernews.js"
+    "publish-prod": "node bin/hackernews.js",
+    "heroku-postbuild": "mkdir ./.cache && mv /app/.cache/puppeteer ./.cache"
   },
   "repository": {
     "type": "git",
