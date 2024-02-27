@@ -3,8 +3,22 @@ import nanoid from "nano-id";
 import axios from 'axios';
 import {query} from '../src/database.js';
 import {completionByAI} from "../src/api/completionByAI.js";
+import {DateTime} from "luxon";
+
+const HOURS_TO_POST = [6, 10, 15]
 
 const main = async () => {
+  const now = DateTime.now().setZone('Europe/Rome')
+  if (!HOURS_TO_POST.includes(Number(now.toFormat('H')))) {
+    process.exit(0)
+  }
+
+  await publish()
+
+  process.exit(0)
+}
+
+const publish = async () => {
   const url = await changeFrontendSiteName()
 
   const {post_id, post_title, post_path, post_text} = await computePost()
@@ -15,8 +29,6 @@ const main = async () => {
 
   await createSiteTitle(url)
   await createSubmission({post_id, post_title, post_url, post_text})
-
-  process.exit(0)
 }
 
 const computePost = async () => {
