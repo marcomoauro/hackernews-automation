@@ -1,6 +1,7 @@
 import log from '../log.js'
 import {query} from '../database.js'
 import {APIError404} from "../errors.js";
+import memoize from "../memoize.js"
 
 export default class Post {
   id
@@ -23,19 +24,22 @@ export default class Post {
     return post
   }
 
-  static getByPath = async (path) => {
-    log.info('Model::Post::getByPath', {path})
+  static getByPath = memoize(async (path) => {
+      log.info('Model::Post::getByPath', {path})
 
-    const rows = await query(`
-        select *
-        from posts
-        where path = ?
-    `, [path]);
+      const rows = await query(`
+          select *
+          from posts
+          where path = ?
+      `, [path]);
 
-    if (rows.length !== 1) throw new APIError404('Post not found.')
+      if (rows.length !== 1) throw new APIError404('Post not found.')
 
-    const post = Post.fromDBRow(rows[0])
+      const post = Post.fromDBRow(rows[0])
 
-    return post
-  }
+      return post
+    },
+    {
+      promise: true
+    })
 }
