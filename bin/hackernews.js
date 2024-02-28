@@ -57,11 +57,13 @@ const computePost = async () => {
       where post_id = ?
   `, [post.id])
 
-  const post_title = await completionByAI({
-    system_message: `riformula questo titolo in inglese per creare un post su HackerNews. Deve essere diverso dai seguenti titoli: "${old_titles.join('; ')}"`,
+  let post_title = await completionByAI({
+    system_message: `riformula questo titolo in inglese per creare un post su HackerNews. Deve essere creativo, stimolare il click e diverso dai seguenti titoli: "${old_titles.join('; ')}"`,
     user_message: old_title,
     system_message2: 'rispondi in inglese con solo il titolo'
   })
+
+  post_title = post_title.replace(/"/g, '')
 
   const post_text = await completionByAI({
     system_message: 'riformula questo commento in inglese per creare un post su HackerNews:',
