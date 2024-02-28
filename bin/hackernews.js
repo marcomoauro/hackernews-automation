@@ -13,6 +13,8 @@ const main = async () => {
     process.exit(0)
   }
 
+  console.log('Start publishing post')
+
   await publish()
 
   process.exit(0)
