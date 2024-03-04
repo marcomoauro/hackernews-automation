@@ -5,7 +5,7 @@ import {query} from '../src/database.js';
 import {completionByAI} from "../src/api/completionByAI.js";
 import {DateTime} from "luxon";
 
-const HOURS_TO_POST = [2, 6, 10, 15, 20]
+const HOURS_TO_POST = process.env.HOURS_TO_POST.split(',').map((h) => parseInt(h.trim()))
 
 const main = async () => {
   const now = DateTime.now().setZone('Europe/Rome')
