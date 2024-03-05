@@ -1,0 +1,56 @@
+@startuml
+
+participant Cron
+participant Daemon
+participant Database
+participant ChatGPT
+participant NetlifyAPI
+participant Puppeteer
+participant HackerNews
+
+Cron -> Daemon: Start daemon
+activate Daemon
+
+Daemon -> Database: Query on "posts" to retrieve random post
+activate Database
+Database --> Daemon: random_post
+deactivate Database
+
+Daemon -> ChatGPT: Generate title and description
+activate ChatGPT
+ChatGPT --> Daemon: <title,description>
+deactivate ChatGPT
+
+Daemon -> NetlifyAPI: Generate new subdomain calling PATCH api
+activate NetlifyAPI
+NetlifyAPI --> Daemon: new_url
+deactivate NetlifyAPI
+
+Daemon -> Puppeteer: Mount headless browser to do new post submission (title,description, url)
+activate Puppeteer
+Puppeteer -> HackerNews: Log in to account
+activate HackerNews
+HackerNews --> Puppeteer: Logged in
+deactivate HackerNews
+Puppeteer -> HackerNews: Publish new post (title,description, url)
+activate HackerNews
+HackerNews --> Puppeteer: Post published
+deactivate HackerNews
+Puppeteer -> Daemon:
+deactivate Puppeteer
+
+Daemon -> Database: Create new record in "submissions" table
+activate Database
+Database --> Daemon: Record created
+deactivate Database
+
+Daemon -> Database: Create new record in "site_titles" table
+activate Database
+Database --> Daemon: Record created
+deactivate Database
+
+Daemon -> Cron: Daemon completed
+
+deactivate Daemon
+
+@enduml

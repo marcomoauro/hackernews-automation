@@ -1,0 +1,23 @@
+@startuml
+actor User as User
+participant "Redirect Frontend"
+participant Backend
+database Database
+participant Implementing
+
+User -> "Redirect Frontend": Clicks on the post on HackerNews
+activate "Redirect Frontend"
+"Redirect Frontend" -> Backend: Call a backend API to retrieve the URL of the post on Implementing
+activate Backend
+Backend -> Database: Doing a SELECT on "posts" table
+activate Database
+Database --> Backend: implementing_url
+deactivate Database
+Backend --> "Redirect Frontend": implementing_url
+deactivate Backend
+"Redirect Frontend" -> Implementing: Redirect to Implementing newsletter on Substack
+activate Implementing
+Implementing --> User: Display of Implementing newsletter on Substack
+deactivate Implementing
+deactivate "Redirect Frontend"
+@enduml
