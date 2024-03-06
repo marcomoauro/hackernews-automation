@@ -2,7 +2,7 @@
 
 participant Cron
 participant Daemon
-participant Database
+database Database
 participant ChatGPT
 participant NetlifyAPI
 participant Puppeteer
