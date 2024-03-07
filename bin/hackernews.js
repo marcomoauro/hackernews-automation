@@ -21,9 +21,9 @@ const main = async () => {
 }
 
 const publish = async () => {
-  const url = await changeFrontendSiteName()
-
   const {post_id, post_title, post_path, post_text} = await computePost()
+
+  const url = await changeFrontendSiteName()
 
   const post_url = `${url}${post_path}`
 
