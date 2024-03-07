@@ -5,6 +5,8 @@ participant Backend
 database Database
 participant Implementing
 
+autonumber
+
 User -> "Redirect Frontend": Clicks on the post on HackerNews
 activate "Redirect Frontend"
 "Redirect Frontend" -> Backend: Call a backend API to retrieve the URL of the post on Implementing

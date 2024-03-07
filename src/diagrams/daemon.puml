@@ -8,6 +8,8 @@ participant NetlifyAPI
 participant Puppeteer
 participant HackerNews
 
+autonumber
+
 Cron -> Daemon: Start daemon
 activate Daemon
 
