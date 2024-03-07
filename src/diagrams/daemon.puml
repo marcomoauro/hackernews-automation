@@ -13,7 +13,7 @@ activate Daemon
 
 Daemon -> Database: Query on "posts" to retrieve random post
 activate Database
-Database --> Daemon: random_post
+Database --> Daemon: <random_post>
 deactivate Database
 
 Daemon -> ChatGPT: Generate title and description
@@ -23,7 +23,7 @@ deactivate ChatGPT
 
 Daemon -> NetlifyAPI: Generate new subdomain calling PATCH api
 activate NetlifyAPI
-NetlifyAPI --> Daemon: new_url
+NetlifyAPI --> Daemon: <new_url>
 deactivate NetlifyAPI
 
 Daemon -> Puppeteer: Mount headless browser to do new post submission (title,description, url)
