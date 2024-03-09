@@ -18,10 +18,11 @@
     "url": "git+https://github.com/marcomoauro/hackernews-automation.git"
   },
   "keywords": [
-    "template",
+    "hackernews",
     "backend",
     "node.js",
-    "koa.js"
+    "koa.js",
+    "chatgpt"
   ],
   "author": "Marco Moauro <marcomoauro@hotmail.it>",
   "license": "ISC",

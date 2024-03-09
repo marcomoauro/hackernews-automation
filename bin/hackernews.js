@@ -4,6 +4,18 @@ import axios from 'axios';
 import {query} from '../src/database.js';
 import {completionByAI} from "../src/api/completionByAI.js";
 import {DateTime} from "luxon";
+import {strict as assert} from 'assert';
+
+assert(process.env.DB_HOST, 'DB_HOST env is required, define it in .env file')
+assert(process.env.DB_USER, 'DB_USER env is required, define it in .env file')
+assert(process.env.DB_PASSWORD, 'DB_PASSWORD env is required, define it in .env file')
+assert(process.env.DB_NAME, 'DB_NAME env is required, define it in .env file')
+assert(process.env.OPEN_AI_API_KEY, 'OPEN_AI_API_KEY env is required, define it in .env file')
+assert(process.env.HACKERNEWS_USERNAME, 'HACKERNEWS_USERNAME env is required, define it in .env file')
+assert(process.env.HACKERNEWS_PASSWORD, 'HACKERNEWS_PASSWORD env is required, define it in .env file')
+assert(process.env.NETLIFY_OAUTH_TOKEN, 'NETLIFY_OAUTH_TOKEN env is required, define it in .env file')
+assert(process.env.NETLIFY_SITE_ID, 'NETLIFY_SITE_ID env is required, define it in .env file')
+
 
 const HOURS_TO_POST = process.env.HOURS_TO_POST.split(',').map((h) => parseInt(h.trim()))
 
